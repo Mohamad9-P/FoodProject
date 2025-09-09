@@ -16,166 +16,7 @@ body {
   width: 100%;
 
 }
-#Crosure{
-  position: relative;
-  width: 100%;
-}
-#main-header {
-  width: 100%;
-  height: 30vh;
-  max-height: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  padding: 2rem 10%;
-  padding-bottom: 0px;
-  position:relative;
-  z-index: 1;
-}
 
-#main-header #title {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  width: 100%;
-}
-
-#main-header #title img {
-  width: 4rem;
-  height: 4rem;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 2px solid #ffc404;
-}
-
-#main-header button {
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 5px;
-  padding: 7px 13px 6px 13px;
-  color: rgba(56, 56, 56, 0.898);
-  background-color: #ffc400;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  transition: 0.5s;
-}
-#main-header button:hover{
-  transform: scale(1.02,1.02);
-  transition: 0.7s;
-  color: black;
-  box-shadow: 0.5px 0.5px 10px white;
-}
-.main-header-buttons{
-  display: flex;
-  align-items: center;
-}
-.main-header-buttons button{
-  margin-left: 10px;
-}
-
-.main-header-buttons input{
-  width: 25rem;
-  height: 2.4rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #443d2fb8;
-  color: #ccc;
-  padding-left: 10px;
-  font-size: larger;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;  
-}
-
-.description{
-  display: flex;
-  height: 70vh;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  margin-left: 3rem;
-  top: 0%;
-  position: relative;
-  z-index: 1;
-  animation: Welcometext 1.3s ease-in;
-}
-@keyframes Welcometext{
-  from {
-    opacity: 0;
-    transform: translateY(200px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-
-  }
-}
-.description h1 {
-  font-size: 6rem;
-  width: 50rem;
-  align-items: center;
-  font-family:'Courier New', Courier, monospace;
-  
-}
-.description p{
-  width: 38rem;
-  padding: 20px 13px 20px 13px;
-  border-radius: 6px;
-  line-height:23px;
-  
-  font-family: Arial, Helvetica, sans-serif;
-  margin-right: 3rem;
-  text-align: center;
-  background-color: #000000a4;
-  color: #ffffffe3;
-}
-.NextOrPrev{
-  text-align: center;
-  margin-right: 3rem;
-}
-.NextOrPrev button{
-  width: 45px;
-  height: 45px;
-  border: none;
-  margin-right: 10px;
-  background-color:hsla(0, 0%, 100%, 0.493);
-  border-radius: 100px; 
-   
-}
-.NextOrPrev button img{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 35px;
-  height: 35px;
-}
-.prevB{
-  rotate: 180deg;
-}
-.slider{
-  position: absolute;
-}
-.image{
-  width: 98vw;
-  height: 100vh;
-  position: relative;
-  object-fit:cover;
-  object-position: center;
-  z-index: 0;
-  top: 0%;
-  left: 0%;
-  margin: 0;
-  box-shadow: none;
-  animation: HeaderImg 1.3s ease-in;
-  filter:brightness(40%);
-}
-@keyframes HeaderImg{
-  from {
-    opacity: 0.4;
-    transform: translate(-10px,-0px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0px,0px);
-  }
-}
 h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 700;
@@ -192,6 +33,7 @@ h1 {
   list-style: none;
   margin: 3rem auto;
   padding: 0.5rem;
+
   display: grid;
   text-align: center;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
@@ -478,6 +320,7 @@ h1 {
   background-color: #d9e2f100;
   color: rgba(101, 101, 101, 0.75);
   font-size: large;
+  text-align: end;
 }
 .success{
   margin-top: 30px;

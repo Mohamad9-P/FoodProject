@@ -1,32 +1,31 @@
-import { useContext } from "react";
-import Modal from "../UI/Modal";
-import { FoodContext } from "../../Context/CartContext";
-import EmptyOrders from "./EmptyOrders";
-import Buttons from "../UI/Buttons";
-import OrdersC from "./Orders";
-import usehttp from "../../Hook/useHttp";
-
+import { useDispatch, useSelector } from "react-redux"
+import Modal from "../UI/Modal"
+import Buttons from "../UI/Buttons"
+import {ModalAction}  from "../../store/Modal-Slice"
+import { CartAction } from "../../store/Carts-Slice"
 const config={}
+export default function Success(){
+    const ModalStatus=useSelector(store=>store.Modal.modalStatus)
+    const cartData=useSelector(store=>store.Carts.CartMeals)
+    const dispatch=useDispatch()
+    function handelSucces(){
+        dispatch(ModalAction.closing())
+        dispatch(CartAction.addOrders(cartData))
+        
+    }
 
-export default function Orders(){
-    const {openModal,Orders,handelCloseModal}=useContext(FoodContext)
-    const {data,error,isLoading}=usehttp("http://localhost:3000/Orders",config)
-
-    return(
-        <>
-        {openModal==="addOrders" && 
-            <Modal>
-                <div className="Orders">
-                    <div className="h1Orders">
-                        <h1>Orders!</h1>   
-                        <img src="../public/car.png"/>
+            return(
+                <>
+                    {ModalStatus==="CheckOut" &&<Modal>
+                    <div className="success">
+                        <h1>Success!</h1>
+                        <p>Your order was submit successfully.</p>
+                        <p>We will get back to you with more details via emial within the next few minutes.</p>
+                        <Buttons onClick={()=>handelSucces()} className="text-button">Okey!</Buttons>
                     </div>
-                    {(!Orders && data.length===0) && <EmptyOrders/> }
-                    {(Orders || data.length!==0) && <OrdersC data={data}/>}
-                    <Buttons onClick={()=>handelCloseModal(false)} className="close">Close</Buttons>
-                </div>
-            </Modal>
-        }
-        </>
-    )
+                </Modal>}
+                </>
+
+            )
+        
 }

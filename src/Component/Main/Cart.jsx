@@ -1,8 +1,10 @@
-import { useContext } from "react"
-import { FoodContext } from "../../Context/CartContext"
+
+import { useDispatch } from "react-redux"
+import { CartAction } from "../../store/Carts-Slice"
 
 export default function Cart({data,wait,error,emptydata}){
-    const {handelAddMeals} = useContext(FoodContext)
+    // const {handelAddMeals} = useContext(FoodContext)
+    const dispatch=useDispatch()
     return(
         <ul id="meals">
             {!wait?data.map(prev=>{
@@ -14,7 +16,7 @@ export default function Cart({data,wait,error,emptydata}){
                             <h3>{prev.name}</h3>
                             <p className="meal-item-price">{prev.price+" $"}</p>
                             <p className="meal-item-description">{prev.description}</p>
-                             <button onClick={()=>handelAddMeals(prev)}>Add to Cart</button>
+                             <button onClick={()=>dispatch(CartAction.addCart(prev))}>Add to Cart</button>
                         </article>
                     </li>
                 )

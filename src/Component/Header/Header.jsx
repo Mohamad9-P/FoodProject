@@ -1,21 +1,22 @@
-import { useContext } from "react"
-import { FoodContext } from "../../Context/CartContext.jsx"
+import './Header.css'
 import Search from "./search.jsx";
-import { SliderContext } from "../../Context/Slider.jsx";
-import { data } from "../../data.js";
+
+import { useDispatch, useSelector } from "react-redux";
+import { ModalAction } from "../../store/Modal-Slice.jsx";
+import Slider from "./Slider.jsx";
+
+
 
 
 export function Header(){
-    const {handelbutton,addmeals}=useContext(FoodContext)
-    const {slice,handelNext,hadnelPrev}=useContext(SliderContext)
-    const FoodLengthAdd=addmeals.length!==0 ? addmeals.reduce((acc,item)=>{
+    const dispatch=useDispatch()
+    const cartData=useSelector(store=>store.Carts.CartMeals)
+    const FoodLengthAdd=cartData.length!==0 ? cartData.reduce((acc,item)=>{
         return acc + item.Selected
     },0):0;
+
     return(
         <div id="Crosure">
-            <div className="slider" key={slice}>
-               <img className="image" src={data[slice].image}/>
-            </div>
             <div id="main-header">
                 <div id="title">
                     <img src="./public/logo.jpg"/>
@@ -23,21 +24,27 @@ export function Header(){
                     </div>
                     <div className="main-header-buttons">
                         <Search/>
-                        <button onClick={()=>handelbutton("addOrders")}>Orders</button>
-                        <button onClick={()=>handelbutton("add")}>Cart{addmeals.length > 1 && "s"}({FoodLengthAdd})</button>
-                        {/* <button onClick={()=>handelbutton("game")}>Game</button> */}
+                        <button onClick={()=>dispatch(ModalAction.opening("OpenOrders"))} className='yellowbutton'>Orders</button>
+                        <button onClick={()=>dispatch(ModalAction.opening("add"))} className='yellowbutton'>ShopCart{cartData.length > 1 && "s"}({FoodLengthAdd})</button>
                     </div>
                 </div>
-            <div className="description">
-                <h1>W e l c o m e</h1>
-                <p>
-                    Granny is a restaurant, bar and coffee roastery located on Egyp. We have awesome recipes and the most talented chafs in town!
-                </p>
-                <div className="NextOrPrev">
-                    <button onClick={()=>hadnelPrev()} className="prevB"><img src="./public/next.png" alt="" /></button>
-                    <button onClick={()=>handelNext()}><img src="./public/next.png" alt="hello" /></button>
-                    
+                    <img src="berger.png" alt="" className="icon berger" />
+                    <img src="mac.png" alt="" className="icon mac" />
+                    <img src="pizza.png" alt="" className="icon pizza" />
+                    <img src="taco.png" alt="" className="icon taco" />
+                    <img src="hotdog.png" alt="" className="icon hotdog" />
+                    <img src='douth.png' className='icon douth'/>
+            
+            <div className="center-header">
+                    <div className="description">
+                    <h1><span>Delicious</span></h1>
+                    <h1>FOOD</h1>
+                    <p>
+                        Discover a world of delicious and diverse flavors! Transform every meal into an unforgettable experience with our fresh, high-quality dishes.
+                    </p>
+                   <button  className='yellowbutton about' onClick={()=>dispatch(ModalAction.opening("About"))} >About</button>
                 </div>
+                <Slider/>
             </div>
 
         </div>

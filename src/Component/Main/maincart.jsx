@@ -1,14 +1,15 @@
 import { animateScroll as scroll } from "react-scroll"
 import Cart from "./Cart"
 import usehttp from "../../Hook/useHttp"
-import { useContext, useEffect, useRef, useState } from "react"
-import { FoodContext } from "../../Context/CartContext"
+import { useSelector } from "react-redux"
+import { useEffect, useRef, useState } from "react"
 
 let dataSearch=[]
 export default function MainCart(){
-    const {search}=useContext(FoodContext)
+    const search=useSelector(store=>store.Carts.Search)
     const [emptydata,setEmptydata]=useState()
     const ref=useRef()
+  
 
     const {data:dataMeals,error,isLoading:wait}=usehttp("http://localhost:3000/meals")
 

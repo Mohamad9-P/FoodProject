@@ -1,17 +1,17 @@
-import { useContext, useEffect, useRef } from "react";
-import { FoodContext } from "../../Context/CartContext";
 
+import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
 export default function Modal({children,openModal,close}){
-    const {openModal:open}=useContext(FoodContext)
+    const ModalStatus=useSelector(sotre=>sotre.Modal.modalStatus)
     const dialog=useRef()
-    console.log(open)
+    console.log(ModalStatus)
     useEffect(()=>{
-        if(open){
+        if(ModalStatus){
             dialog.current.showModal()
-        }else if(!open){
+        }else if(!ModalStatus){
             dialog.current.close()
         }
-    },[open])
+    },[ModalStatus])
     return(
         <dialog ref={dialog} className="modal">
             {children}

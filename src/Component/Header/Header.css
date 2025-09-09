@@ -1,0 +1,218 @@
+#Crosure{
+  
+  width: 100%;
+}
+#main-header {
+  width: 100%;
+  height: 100%;
+  max-height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 2rem 3%;
+  padding-bottom:3rem;
+
+}
+
+#main-header #title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+#main-header #title img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid #ffc404;
+}
+
+.yellowbutton{
+    font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 13px 6px 13px;
+  color: rgba(56, 56, 56, 0.898);
+  background-color: #ffc400;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  transition: 0.5s;
+}
+.yellowbutton.about{
+    padding: 10px 25px 10px 25px;
+    border-radius:30px ;
+}
+#main-header button:hover{
+  transform: scale(1.02,1.02);
+  transition: 0.7s;
+  color: black;
+  box-shadow: 0.5px 0.5px 10px white;
+}
+.main-header-buttons{
+  display: flex;
+  align-items: center;
+}
+.main-header-buttons button{
+  margin-left: 10px;
+}
+
+.main-header-buttons input{
+  width: 25rem;
+  height: 2.4rem;
+  border: none;
+  border-radius: 20px;
+  background-color: #443d2fb8;
+  color: #ccc;
+  padding-left: 19px;
+  font-size: larger;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;  
+}
+.center-header{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  height: 100%;
+  animation: header 2s;
+}
+@keyframes header {
+    0%{
+        transform: translate(0px,-100px)
+    }
+    100%{
+        transform: translate(0px,0x)
+    }
+
+}
+.description{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-left: 3rem;
+  top: 75px;
+  left: 50px;
+  position: relative;
+  z-index: 1;
+  animation: Welcometext 1.3s ease-in;
+}
+
+.description h1 {
+  font-size: 6rem;
+  
+  font-family:'Courier New', Courier, monospace;
+}
+.description p{
+  padding: 0px;
+  margin-top: 0px;
+  width: 34rem;
+  font-size: medium;
+  line-height:23px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  color: #ffffff83;
+}
+.NextOrPrev{
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 0.9rem;
+}
+.NextOrPrev button{
+  width: 45px;
+  height: 45px;
+  border: none;
+  margin-right: 13px;
+  background-color:hsla(0, 0%, 100%, 0.066);
+  border-radius: 100px; 
+  margin-top: 5px;
+   
+}
+.NextOrPrev button img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+}
+.prevB{
+  rotate: 180deg;
+}
+.slider{
+  box-sizing: border-box;
+  width:99%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  position: relative;
+  margin-top: 60px;
+}                                                                                                                                                                                                                                                                                                                                
+.image{
+  width: 60%;
+  height: 70%;
+  object-fit:cover;
+  border-radius: 10px;
+  object-position: center;
+ box-shadow: 0 0 13px 3px rgba(0, 0, 0, 0.368) ;
+  
+  animation: HeaderImg 1.3s ease-in;
+  filter:brightness(80%);
+}
+.icon{
+    width: 76px;
+    height: 76px;
+    position: absolute;
+    padding: 10px 10px 10px 10px;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 6px;
+    margin-top: 100px;
+    animation: icon 4s infinite;
+}
+@keyframes icon {
+    0%{
+        transform: translate3d(0px,0px,0px);
+    }50%{
+        transform: translate3d(5px,7px,7px);
+    }
+    100%{
+        transform: translate3d(0px,0px,0px);
+    }
+}
+.icon.berger{
+    top: 180px;
+    left: 100px;
+    rotate: 10deg;
+}
+.icon.hotdog{
+    top: 290px;
+    left: 700px;
+    rotate: 14deg;
+}
+.icon.taco{
+    top: 20px;
+    left: 600px;
+    rotate: 5deg;
+}
+.icon.pizza{
+    top: 440px;
+    left: 800px;
+    rotate: 10deg;
+}
+.icon.mac{
+    top: 400px;
+    left: 400px;
+    rotate: 22deg;
+}
+.icon.douth{
+    top: 0px;
+    left: 1300px;
+    rotate: 10deg;
+}
+.fade{
+    width: 45%;
+    height: 50%;
+    opacity: 50%;
+}
+

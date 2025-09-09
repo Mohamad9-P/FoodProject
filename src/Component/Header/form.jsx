@@ -1,20 +1,21 @@
-import {useActionState, useContext} from "react"
-import { FoodContext } from "../../Context/CartContext"
+import {useActionState} from "react"
 import Modal from "../UI/Modal"
 import usehttp from "../../Hook/useHttp"
 import Buttons from "../UI/Buttons"
+import { useDispatch, useSelector } from "react-redux"
+import { ModalAction } from "../../store/Modal-Slice"
 
 const config={method:"POST",headers:{"Content-type" : "application/json"}}
 
 export default function Form(){
-    const {openModal,handelbutton,handelCloseModal,addmeals}=useContext(FoodContext)
-
+    const cartData=useSelector(store=>store.Carts.CartMeals)
+    
+    const ModalStatus=useSelector(store=>store.Modal.modalStatus)
+    const dispatch=useDispatch()
     const {data,isLoading,error,sendHttp}=usehttp('http://localhost:3000/orders',config)
     
-    const price=addmeals.reduce((acc,price)=>{
-        return acc + (+price.price * price.Selected);
-    },[])
-
+    const price=cartData.reduce((acc,item)=> {return acc + (+item.price * item.Selected)},0)
+    console.log(price)
     async function handelaction(state,formdata){
         const data=Object.fromEntries(formdata.entries())
         let error=[]
@@ -34,32 +35,20 @@ export default function Form(){
         if(error.length > 0){
             return {error:error , defaultvalue:data}
         }
+        console.log(cartData)
         await sendHttp(JSON.stringify({order:{
-            items:addmeals,customer:data
+            items:cartData,customer:data
           }}))
-        handelbutton('CheckOut')
+        dispatch(ModalAction.opening("CheckOut"))
         return {error:null,isLoading}
     }
-    function handelCheckOut(){
-        handelaction("CheckOut")
-    }
+
     const [action,actionstate,pending]=useActionState(handelaction,{error:null})
     //console.log(action.defaultvalue)
-    let CheckOut=(
-        <div className="success">
-            <h1>Success!</h1>
-            <p>Your order was submit successfully.</p>
-            <p>We will get back to you with more details via emial within the next few minutes.</p>
-            <Buttons onClick={()=>handelCloseModal(true)} className="text-button">Okey!</Buttons>
-        </div>
-    )
-    console.log(addmeals)
-    if(openModal==="CheckOut"){
-        return <Modal>{CheckOut}</Modal>
-    }
+
     return(
         <>
-        {openModal==="Form" && <Modal>
+        {ModalStatus==="Form" && <Modal>
             <form action={actionstate}>
                 <h2>Checkout</h2>
                 <h4>{price}$</h4>
@@ -91,8 +80,8 @@ export default function Form(){
                     })}
                 </ul>
                 <div className="buttons">
-                    <Buttons type="button" className="close" onClick={()=>handelCloseModal(false)} >Close</Buttons>
-                    <Buttons handelbutton={handelCheckOut} className="text-button" type="submit" disabled={pending}>Submit Order</Buttons>                
+                    <Buttons type="button" className="close" onClick={()=>dispatch(ModalAction.closing())} >Close</Buttons>
+                    <Buttons  className="text-button" type="submit" disabled={pending}>Submit Order</Buttons>                
                 </div>
 
         </form>

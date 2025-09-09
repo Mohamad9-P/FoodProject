@@ -1,25 +1,30 @@
 
-import { useContext } from "react"
-import { FoodContext } from "../../Context/CartContext.jsx"
 import Modal from "../UI/Modal.jsx";
 import Buttons from "../UI/Buttons.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { ModalAction } from "../../store/Modal-Slice.jsx";
+import { CartAction } from "../../store/Carts-Slice.jsx";
+
 export default function AddRemove(){
-    const {addmeals:data,handelAdd,openModal,handelCloseModal,handelbutton} = useContext(FoodContext);
-    const price=data.reduce((acc,item)=> {return acc + (+item.price * item.Selected)},0)
+
+    const ModalStatus=useSelector(store=>store.Modal.modalStatus)
+    const cartData=useSelector(store=>store.Carts.CartMeals)
+    const dispatch=useDispatch()
+    const price=cartData.reduce((acc,item)=> {return acc + (+item.price * item.Selected)},0)
     //console.log(openModal)
     return(
         <>
-        {openModal==="add"&&<Modal>
+        {ModalStatus==="add"&&<Modal>
             <ul >
             <h2>Your Cart</h2>
-            {data.map(item=>{
+            {cartData.map(item=>{
                 return(
                     <li key={item.id} className="cart-item">
                         <p>{item.name}</p>
                         <div className="cart-item-actions">
-                            <button onClick={()=>handelAdd(item,"+")}>+</button>
+                            <button onClick={()=>dispatch(CartAction.addCart(item))}>+</button>
                             <p>{item.Selected}</p>
-                            <button onClick={()=>handelAdd(item,"-")}>-</button>
+                            <button onClick={()=>dispatch(CartAction.removeCart(item))}>-</button>
                            
                         </div>
                        
@@ -28,8 +33,8 @@ export default function AddRemove(){
             })}
              <h3 className="price">{price.toFixed(2)}$</h3>
              <div className="buttons">
-                <Buttons onClick={()=>handelCloseModal(false)} className="close">Close</Buttons>
-                {data.length>0 && <Buttons className="text-button" onClick={()=>handelbutton("Form")} type="seubmit">Go To Checkout</Buttons>}
+                <Buttons onClick={()=>dispatch(ModalAction.closing())} className="close">Close</Buttons>
+                {cartData.length>0 && <Buttons className="text-button" onClick={()=>dispatch(ModalAction.opening("Form"))} type="seubmit">Go To Checkout</Buttons>}
              </div>
         </ul>
         </Modal>}

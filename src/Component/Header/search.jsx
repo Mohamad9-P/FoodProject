@@ -1,13 +1,15 @@
-import { useContext} from "react"
-import { FoodContext } from "../../Context/CartContext"
+
+import { useDispatch, useSelector } from "react-redux"
+import { CartAction } from "../../store/Carts-Slice.jsx"
 
 export default function Search(){
-    const {search,handelsearch}=useContext(FoodContext)
-    //console.log(array.filter(item=>item.includes(search)))
-    //console.log(search)
+    const dispatch=useDispatch()
+    const search=useSelector(store=>store.Carts.Search)
+    console.log(search)
+
     return(
         <>
-            <input  type="search" value={search} placeholder="Search…" onChange={(event)=>handelsearch(event)}/>
+            <input  type="search" value={search} placeholder="Search…" onChange={(event)=>dispatch(CartAction.handelSearch(event.target.value))}/>
         </>
     )
 }
